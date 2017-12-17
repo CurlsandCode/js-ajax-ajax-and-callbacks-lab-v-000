@@ -20,9 +20,9 @@ function showRepositories(value) {
 function showCommits(el) {
 	const repo = el.dataset.repository;
 	const owner = el.dataset.owner;
-	
+
 	$.get(baseUrl + `repos/${owner}/${repo}/commits`, function(response) {
-		
+
 		const commitHTML = displayCommits(response);
 		$('#details').html(commitHTML);
 
@@ -34,16 +34,16 @@ function showCommits(el) {
 
 function displayCommits(response) {
 	const commits = response;
-	
-	const commitList = "<ul>" + commits.map(c => {		
+
+	const commitList = "<ul>" + commits.map(c => {
 		return(`
 				<li>
 					<section>
 						<h4>SHA: ${c.sha}</h4>
-						<h3>Author: ${c.commit.author.name}</h3>						
+						<h3>Author: ${c.commit.author.name}</h3>
 						<p>Author Login: ${c.author === null ? 'not avaliable' : c.author.login}</p>
 						<img src="${c.author.avatar_url}" width="32" height="32" />
-					</section>			
+					</section>
 				</li>
 			`)
 	}).join('') + "</ul>";
